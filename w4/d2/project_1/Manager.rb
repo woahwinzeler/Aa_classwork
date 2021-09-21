@@ -1,22 +1,21 @@
-require "Manager.rb"
+require "Employee.rb"
 
-class Employee
+class Manager < Employee
 
-    attr_reader :salary
-
-    def initialize(name, title, salary, boss = nil)
-        @name = name
-        @title = title 
-        @salary = salary
-        @boss = boss
+    def initialize(employees)
+        super
+        @employees = employees 
     end
 
     def bonus(multiplier)
-        @salary * multiplier 
-    end 
+        sum = 0
+        employees.each do |employee|
+            sum += employee.salary
+        end
+        sum * multiplier 
+    end
 
 end
-
 
 
 Ned = Manager.new("Ned", "Founder", 1000000, nil, ["Darren", "Shawna", "David"])
