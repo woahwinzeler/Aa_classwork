@@ -8,10 +8,12 @@ class Board
     rows = Array.new(8){Array.new(8)}
     rows.each_with_index do |row, file|
       row.each_with_index do |tile, idx|
-        if file < 2 or file > 5
-          rows[file][idx] = :A
+        if file < 2 
+          rows[file][idx] = Piece.new(@board, [file, idx], :W)
+        elsif file > 5
+          rows[file][idx] = Piece.new(@board, [file, idx], :B)
         else
-          rows[file][idx] = :O
+          rows[file][idx] = nil 
         end
       end
     end
@@ -51,7 +53,8 @@ class Board
   def valid_move?(start_pos, end_pos)
     pos = start_pos + end_pos
     pos.each { |x| return false if x < 0 || x > 7 } #checking if its on board
-    return false if start_pos.nil? #is there a piece at start pos? End pos later
+    return false if start_pos.nil? #is there a piece at start pos? #
+    #Check to see if End pos is filled TODO
     true 
   end
 end
