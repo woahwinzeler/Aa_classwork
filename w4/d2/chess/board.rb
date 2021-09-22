@@ -1,5 +1,6 @@
 #require_relative "./piece.rb"
 #require 'byebug'
+require 'require_all'
 require_all 'chess'
 
 
