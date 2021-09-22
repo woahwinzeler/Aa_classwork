@@ -4,10 +4,19 @@ require_relative "./piece.rb"
 
 
 class Pawn < Piece 
-  attr_reader :color
+  attr_reader :color, :piece_image
 
   def move_dirs
     moves = [[0,2],[0,1],[1,1],[-1,1]]
+  end
+
+  def initialize(board, pos, color)
+    super(board, pos, color)
+    if color== :W
+      @piece_image = '♙'
+    else
+      @piece_image = '♟'
+    end
   end
 
   private 

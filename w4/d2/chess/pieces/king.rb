@@ -1,14 +1,19 @@
 require_relative "./piece.rb"
 require_relative "./stepable.rb"
 
-
-
-
-
-class Knight < Piece
+class King < Piece
   include Stepable
-  attr_reader :color
-  moves = [[2,1], [-2,1], [2,-1], [-2,-1], [1,2], [1,-2], [-1,2], [-1, -2]]
+  attr_reader :color, :piece_image
+  moves = [[1,1], [1,0], [-1, 0], [0,-1], [0,1], [-1,1], [-1,-1], [1,-1]]
+  
+  def initialize(board, pos, color)
+    super(board, pos, color)
+    if color == :W
+      @piece_image = '♔'
+    else
+      @piece_image = '♚'
+    end 
+  end
 
   def move_difs(current_pos)
     possible_moves = []
@@ -17,5 +22,4 @@ class Knight < Piece
       possible_moves << new_pos if @board.valid_move?(current_pos, new_pos)
     end 
   end
-
 end

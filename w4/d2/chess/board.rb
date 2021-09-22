@@ -2,8 +2,8 @@
 # require 'require_all'
 require_relative './piece.rb'
 
-Dir["/mnt/c/Users/tharp/Desktop/Pair Programming/Employee_Classes/Aa_classwork/w4/d2/lib/*.rb"].each {|file| require file }
-#Dir["/Users/williamwinzeler/Desktop/App_academy/aa_coursework/w4/d2/chess/*.rb"].each {|file| require file }
+#Dir["/mnt/c/Users/tharp/Desktop/Pair Programming/Employee_Classes/Aa_classwork/w4/d2/lib/*.rb"].each {|file| require file }
+Dir["/Users/williamwinzeler/Desktop/App_academy/aa_coursework/w4/d2/chess/pieces/*.rb"].each {|file| require file }
 
 class Board
   attr_reader :board
@@ -24,7 +24,7 @@ class Board
         elsif file == 7
           rows[file][idx] = BACK_RANK[idx].new(@board, [file, idx], :B)
         else
-          rows[file][idx] = NullPiece.instance       #(@board, [file, idx], :X)
+          rows[file][idx] = NullPiece.instance    
         end
       end
     end
@@ -40,11 +40,11 @@ class Board
   end
 
   def move_piece(start, end_pos)
-    if valid_move?(end_pos)
+    if valid_move?(start, end_pos)
       x, y = start
       i, j = end_pos
+      @board[i][j] = self.board[x][y]
       @board[x][y] = NullPiece.instance
-      @board[i][j] = self
     end 
   end
 
@@ -65,15 +65,26 @@ class Board
   def valid_move?(start_pos, end_pos)
     pos = start_pos + end_pos
     pos.each { |x| return false if x < 0 || x > 7 } #checking if its on board
-    return false if start_pos.nil? #is there a piece at start pos? #
-    #Check to see if End pos is filled TODO
+    return false if !@board[start_pos[0]][start_pos[1]].color == :X #is there a piece at start pos? 
+    return false if @board[end_pos[0]][end_pos[1]].color == @board[start_pos[0]][start_pos[1]].color   #Check to see if End pos is filled with same color piece 
+    #TODO check to see if pieces can move the way the arguments suggest
+
     true 
   end
 
-  def inspect
-    
-
+  def render
+    @board.each_with_index do |row, row_idx|
+      row.each_with_index do |col, col_idx|
+        print "#{@board[row_idx][col_idx].piece_image}"
+      end 
+      print "\n"
+    end
+    return nil
   end
+
+  # def inspect
+  #   "#{piece_image}"
+  # end
 
 
 
