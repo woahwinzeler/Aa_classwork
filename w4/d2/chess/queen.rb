@@ -12,7 +12,7 @@ class Queen < Piece
         directions = diaganols + horizontals   
         directions.each do |dir|
             new_pos = [start_pos[0] + dir[0], start_pos[1] + dir[1]]
-            if @board.valid_move?(new_pos, [1, 1])
+            if @board.valid_move?(start_pos, new_pos)
                 valid_moves << new_pos 
             end 
         end 

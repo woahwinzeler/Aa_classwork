@@ -2,7 +2,7 @@
 require_relative './board.rb'
 
 class Piece 
-  attr_reader :color, :board
+  attr_reader :color, :board, :pos
 
   def initialize(board, pos, color)
     @pos = pos #array

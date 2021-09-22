@@ -1,19 +1,27 @@
-require_relative "./piece.rb"
-require 'byebug'
+#require_relative "./piece.rb"
+#require 'byebug'
+require_all 'chess'
+
 
 class Board
   attr_reader :board
+
+  BACK_RANK = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
 
   def self.build_board
     rows = Array.new(8){Array.new(8)}
     rows.each_with_index do |row, file|
       row.each_with_index do |tile, idx|
-        if file < 2 
-          rows[file][idx] = Piece.new(@board, [file, idx], :W)
-        elsif file > 5
-          rows[file][idx] = Piece.new(@board, [file, idx], :B)
+        if file == 2 
+          rows[file][idx] = Pawn.new(@board, [file, idx], :W)
+        elsif file == 6
+          rows[file][idx] = Pawn.new(@board, [file, idx], :B)
+        elsif file == 1
+          rows[file][idx] = BACK_RANK[idx].new(@board, [file, idx], :W)
+        elsif file == 7
+          rows[file][idx] = BACK_RANK[idx].new(@board, [file, idx], :B)
         else
-          rows[file][idx] = nil 
+          rows[file][idx] = NullPiece.new(@board, [file, idx], :X)
         end
       end
     end
