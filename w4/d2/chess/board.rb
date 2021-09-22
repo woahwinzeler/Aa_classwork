@@ -1,6 +1,5 @@
 # require 'byebug'
 # require 'require_all'
-require_relative './piece.rb'
 
 #Dir["/mnt/c/Users/tharp/Desktop/Pair Programming/Employee_Classes/Aa_classwork/w4/d2/lib/*.rb"].each {|file| require file }
 Dir["/Users/williamwinzeler/Desktop/App_academy/aa_coursework/w4/d2/chess/pieces/*.rb"].each {|file| require file }
@@ -31,10 +30,8 @@ class Board
     rows 
   end
 
-  def initialize
-    @board = Board.build_board
-
-
+  def initialize(board)
+    @board = board 
     # private 
     # @sentinal = NullPiece
   end
@@ -72,15 +69,15 @@ class Board
     true 
   end
 
-  def render
-    @board.each_with_index do |row, row_idx|
-      row.each_with_index do |col, col_idx|
-        print "#{@board[row_idx][col_idx].piece_image}"
-      end 
-      print "\n"
-    end
-    return nil
-  end
+  # def render
+  #   @board.each_with_index do |row, row_idx|
+  #     row.each_with_index do |col, col_idx|
+  #       print "#{@board[row_idx][col_idx].piece_image}"
+  #     end 
+  #     print "\n"
+  #   end
+  #   return nil
+  # end
 
   # def inspect
   #   "#{piece_image}"
