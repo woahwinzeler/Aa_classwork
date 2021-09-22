@@ -1,8 +1,6 @@
 module Slideable
   attr_reader :DIAGNOL_DIRS, :HORIZONTAL_DIRS
   
-  
-  
   private 
   def move_dirs
     #We're leaving it blank to be overwritten by the subclass
