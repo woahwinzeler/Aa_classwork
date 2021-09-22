@@ -2,6 +2,7 @@ require_relative "./piece.rb"
 
 
 
+
 class Pawn < Piece 
   attr_reader :color
 

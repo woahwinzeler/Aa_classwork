@@ -4,10 +4,10 @@ GEM
     require_all (3.0.0)
 
 PLATFORMS
-  x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   require_all
 
 BUNDLED WITH
-   2.2.26
+   2.2.25

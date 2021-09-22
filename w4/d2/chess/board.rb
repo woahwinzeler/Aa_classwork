@@ -1,8 +1,9 @@
-#require_relative "./piece.rb"
-#require 'byebug'
-require 'require_all'
-require_all 'chess'
+# require 'byebug'
+# require 'require_all'
+require_relative './piece.rb'
 
+Dir["/mnt/c/Users/tharp/Desktop/Pair Programming/Employee_Classes/Aa_classwork/w4/d2/lib/*.rb"].each {|file| require file }
+#Dir["/Users/williamwinzeler/Desktop/App_academy/aa_coursework/w4/d2/chess/*.rb"].each {|file| require file }
 
 class Board
   attr_reader :board
@@ -11,18 +12,19 @@ class Board
 
   def self.build_board
     rows = Array.new(8){Array.new(8)}
+    @board = rows 
     rows.each_with_index do |row, file|
       row.each_with_index do |tile, idx|
-        if file == 2 
+        if file == 1
           rows[file][idx] = Pawn.new(@board, [file, idx], :W)
         elsif file == 6
           rows[file][idx] = Pawn.new(@board, [file, idx], :B)
-        elsif file == 1
+        elsif file == 0
           rows[file][idx] = BACK_RANK[idx].new(@board, [file, idx], :W)
         elsif file == 7
           rows[file][idx] = BACK_RANK[idx].new(@board, [file, idx], :B)
         else
-          rows[file][idx] = NullPiece.new(@board, [file, idx], :X)
+          rows[file][idx] = NullPiece.instance       #(@board, [file, idx], :X)
         end
       end
     end
@@ -30,18 +32,19 @@ class Board
   end
 
   def initialize
-    @board = Board.build_board 
-    
+    @board = Board.build_board
+
+
     # private 
     # @sentinal = NullPiece
   end
 
-  def move_piece(start, end_pos, piece = :X)
+  def move_piece(start, end_pos)
     if valid_move?(end_pos)
       x, y = start
       i, j = end_pos
-      @board[x][y] = nil
-      @board[i][j] = piece
+      @board[x][y] = NullPiece.instance
+      @board[i][j] = self
     end 
   end
 
@@ -66,4 +69,13 @@ class Board
     #Check to see if End pos is filled TODO
     true 
   end
+
+  def inspect
+    
+
+  end
+
+
+
+
 end
