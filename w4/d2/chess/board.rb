@@ -1,8 +1,8 @@
 # require 'byebug'
 # require 'require_all'
 
-#Dir["/mnt/c/Users/tharp/Desktop/Pair Programming/Employee_Classes/Aa_classwork/w4/d2/lib/*.rb"].each {|file| require file }
-Dir["/Users/williamwinzeler/Desktop/App_academy/aa_coursework/w4/d2/chess/pieces/*.rb"].each {|file| require file }
+Dir["/mnt/c/Users/tharp/Desktop/Pair Programming/Employee_Classes/Aa_classwork/w4/d2/chess/pieces/*.rb"].each {|file| require file }
+#Dir["/Users/williamwinzeler/Desktop/App_academy/aa_coursework/w4/d2/chess/pieces/*.rb"].each {|file| require file }
 
 class Board
   BACK_RANK = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]

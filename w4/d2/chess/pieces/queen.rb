@@ -26,10 +26,9 @@ class Queen < Piece
         horizontals = HORIZONTAL_DIRS.dup 
         valid_moves = []
         directions = diaganols + horizontals   
-        #debugger 
         directions.each do |dir|
             new_pos = [start_pos[0] + dir[0], start_pos[1] + dir[1]]
-            if @board.valid_move?(start_pos, new_pos)
+            if @board_object.board.valid_move?(start_pos, new_pos)
                 valid_moves << new_pos 
                 valid_moves << grow_unblocked_moves_in_dir(dir[0], dir[1])
             end 
