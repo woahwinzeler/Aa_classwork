@@ -4,7 +4,7 @@ require_relative "./stepable.rb"
 class King < Piece
   include Stepable
   attr_reader :color, :piece_image
-  moves = [[1,1], [1,0], [-1, 0], [0,-1], [0,1], [-1,1], [-1,-1], [1,-1]]
+  
   
   def initialize(board, pos, color)
     super(board, pos, color)
@@ -16,6 +16,7 @@ class King < Piece
   end
 
   def move_difs(current_pos)
+    moves = [[1,1], [1,0], [-1, 0], [0,-1], [0,1], [-1,1], [-1,-1], [1,-1]]
     possible_moves = []
     moves.each do |move|
       new_pos = [move[0] + current_pos[0], move[1] + current_pos[1]]

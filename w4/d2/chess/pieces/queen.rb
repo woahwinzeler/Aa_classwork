@@ -37,7 +37,7 @@ class Queen < Piece
         valid_moves 
     end
 
-
+  #needs to be tested 
   def grow_unblocked_moves_in_dir(dx, dy)
     board = @board 
     x_val = self.pos[0] + dx 

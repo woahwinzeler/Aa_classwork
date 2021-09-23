@@ -42,8 +42,7 @@ class Pawn < Piece
   def forward_steps
     #check if forward directions are valid
     possilbe_moves = self.forward_dir.take(2) 
-    possilbe_moves.select{|move| @board.valid_move?(pos, move)}
-    
+    possilbe_moves.select{|move| @board.valid_move?(pos, move)}  
   end
 
   def side_attacks

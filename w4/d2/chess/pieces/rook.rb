@@ -17,7 +17,7 @@ class Rook < Piece
       end
     end
 
-
+    #need to scale/Grow in direction 
     def move_dirs(start_pos)
         horizontals = HORIZONTAL_DIRS.dup 
         valid_moves = []
