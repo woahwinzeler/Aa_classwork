@@ -1,3 +1,4 @@
+
 class Integer
   # Integer#hash already implemented for you
 end
@@ -7,7 +8,11 @@ class Array
     hashed = 0 
     
     self.each_with_index do |ele, idx|
-      hashed += (ele + idx).hash
+      if !ele.is_a?(Integer) 
+        hashed += ele.hash + idx.hash
+      else
+        hashed += (ele + idx).hash
+      end
     end
 
     hashed 
@@ -37,7 +42,7 @@ class Hash
     self.each do |k, v|
       hashed += (k.hash + v.hash)
     end
-    
+
     hashed 
   end
 end

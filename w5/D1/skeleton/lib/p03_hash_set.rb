@@ -8,6 +8,7 @@ class HashSet < ResizingIntSet
     @count = 0
   end
 
+  #needs work 
   def insert(key)
     super(key.hash)
   end
@@ -16,8 +17,17 @@ class HashSet < ResizingIntSet
     super(key.hash)
   end
 
+  #needs work 
   def remove(key)
-    @count = super(key.hash) if !@count.nil?
+    hashed_key = key.hash
+    if include?(key)
+      self[hashed_key].delete(hashed_key)
+      @count -= 1
+    else
+      return nil
+    end
+    @count
+    # @count = super(key.hash) if !@count.nil?
   end
 
   private

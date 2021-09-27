@@ -74,6 +74,7 @@ class ResizingIntSet
   end
 
   def insert(num)
+    #puts num 
     if !include?(num)
       self[num] << num
       @count += 1
