@@ -2,7 +2,9 @@ require_relative 'p04_linked_list'
 require "byebug"
 
 class HashMap
-  attr_accessor :count
+  attr_accessor :count, :store
+
+  include Enumerable
 
   def initialize(num_buckets = 8)
     @store = Array.new(num_buckets) { LinkedList.new }
@@ -10,30 +12,39 @@ class HashMap
   end
 
   def include?(key)
-    hashed_key = key.hash
-    @store[bucket(key)].include?(hashed_key)
+    @store[bucket(key)].include?(key)
   end
 
   def set(key, val)
-    
+    if !include?(key)
+      @store[bucket(key)].append(key, val)
+      @count += 1
+      if @count == num_buckets
+        resize!
+      end
+    else 
+      @store[bucket(key)].update(key, val)
+    end
   end
 
   def get(key)
-    # debugger
-    hashed_key = key.hash
-    nodes = []
-    # return key if @store[bucket(key)].include?(hashed_key)
     @store[bucket(key)].each do |node|
-      nodes << node
+      return node.val if node.key == key 
     end
-    nodes
-    # nil
+    nil
   end
 
   def delete(key)
+    @store[bucket(key)].remove(key)
+    @count -= 1
   end
 
   def each
+    @store.each do |bucket| 
+      bucket.each do |ele|
+        yield ele.key, ele.val 
+      end
+    end
   end
 
   # uncomment when you have Enumerable included
@@ -54,15 +65,29 @@ class HashMap
   end
 
   def resize!
-    new_int_set = ResizingIntSet.new(num_buckets * 2)
-    @count = 0
+    new_map = HashMap.new(num_buckets * 2)
+    @count = 0 
+
     @store.each do |bucket|
-      bucket.each do |ele|
-        new_int_set.store[ele % (num_buckets * 2)] << ele
-        @count += 1
+      bucket.each do |node|
+        new_map.store[node.key.hash % num_buckets * 2].append(node.key, node.val)
+        new_map.count += 1
       end
     end
-    @store = new_int_set.store
+
+    @store = new_map.store
+    @count = new_map.count
+
+
+    # new_int_set = ResizingIntSet.new(num_buckets * 2)
+    # @count = 0
+    # @store.each do |bucket|
+    #   bucket.each do |ele|
+    #     new_int_set.store[ele % (num_buckets * 2)] << ele
+    #     @count += 1
+    #   end
+    # end
+    # @store = new_int_set.store
   end
 
   def bucket(key)
