@@ -90,6 +90,7 @@ class ResizingIntSet
     else
       return nil
     end
+    @count
   end
 
   def include?(num)
