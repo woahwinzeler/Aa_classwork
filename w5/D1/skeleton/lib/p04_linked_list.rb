@@ -1,3 +1,5 @@
+require "byebug"
+
 class Node
   attr_reader :key
   attr_accessor :val, :next, :prev
@@ -72,10 +74,21 @@ class LinkedList
   end
 
   def each
+    values = [@head]
+    until values.last.next.nil?
+      values << values.last.next
+    end
+    # new_arr = []
+    values.each do |ele| 
+      # debugger
+      yield ele if !ele.val.nil?
+    end
+
+    # return new_arr
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
