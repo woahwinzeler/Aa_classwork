@@ -52,9 +52,19 @@ class LinkedList
   end
 
   def get(key)
+    @list.each do |node|
+      if node.key == key
+        return node.val
+      end
+    end
+    nil 
   end
 
   def include?(key)
+    @list.each do |node|
+      return true if node.key == key 
+    end
+    false 
   end
 
   def append(key, val)
@@ -68,9 +78,29 @@ class LinkedList
   end
 
   def update(key, val)
+      @list.each do |node|
+        if node.key == key 
+          node.val = val
+        end
+      end
   end
 
   def remove(key)
+    our_node = nil
+    @list.each do |node|
+      if node.key == key
+        our_node = node
+      end  
+    end
+
+    our_node.prev.next = our_node.next 
+    our_node.next.prev = our_node.prev
+
+   #our_node.prev = nil
+   #our_node.next = nil
+   
+   @list.delete(our_node)
+
   end
 
   def each
