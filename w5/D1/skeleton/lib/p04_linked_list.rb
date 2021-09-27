@@ -20,7 +20,13 @@ class Node
 end
 
 class LinkedList
+  include Enumerable
   def initialize
+    @head = Node.new
+    @tail = Node.new
+    @head.next = @tail
+    @tail.prev = @head
+    @list = [@head, @tail]
   end
 
   def [](i)
@@ -35,6 +41,7 @@ class LinkedList
   end
 
   def empty?
+    !(@list.length > 2)
   end
 
   def get(key)
@@ -44,6 +51,7 @@ class LinkedList
   end
 
   def append(key, val)
+
   end
 
   def update(key, val)
