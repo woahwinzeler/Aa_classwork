@@ -51,7 +51,7 @@ class LinkedList
   end
 
   def append(key, val)
-
+    
   end
 
   def update(key, val)
