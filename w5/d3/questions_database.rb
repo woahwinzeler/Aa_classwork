@@ -43,6 +43,16 @@ class Question
     self.new(question.first)
   end
 
+  def self.find_by_author_id(author_id)
+    question = QuestionsDatabase.instance.execute(<<-SQL, author_id)
+    SELECT *
+    FROM questions
+    WHERE users_id = ?
+    SQL
+    #need to create an object
+    self.new(question.first)
+  end
+
   attr_reader :id, :title, :body, :users_id
   def initialize(hash)
     @id = hash['id']
@@ -63,6 +73,21 @@ class Users
     SQL
 
     self.new(users.first)
+  end
+
+  def self.find_by_name(fname, lname)
+    #should look up and ID in the table and return an object represeting a row
+    users = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
+    SELECT *
+    FROM users
+    WHERE fname = ? AND lname = ?
+    SQL
+
+    self.new(users.first)
+  end
+
+  def authored_questions
+    Question.find_by_author_id(self.id)
   end
 
   attr_reader :id, :fname, :lname
@@ -115,6 +140,25 @@ class Replies
     self.new(reply.first)
   end
 
+  def self.find_by_user_id(users_id)
+    reply = QuestionsDatabase.instance.execute(<<-SQL, users_id)
+    SELECT *
+    FROM replies
+    WHERE users_id = ?
+    SQL
+    self.new(reply.first)
+  end
+
+  def self.find_by_question_id(question_id)
+    reply = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+    SELECT *
+    FROM replies
+    WHERE questions_id = ?
+    SQL
+    self.new(reply.first)
+  end
+
+
   attr_reader :id, :body, :users_id, :questions_id, :parent_id
   def initialize(hash)
     @id = hash['id']
@@ -151,3 +195,8 @@ class QuestionLikes
 
 end
 
+p q1 = Question.find_by_id(1)
+p Replies.find_by_question_id(1)
+p Replies.find_by_user_id(1)
+p gw = Users.find_by_name("George", "Washington")
+p gw.authored_questions
