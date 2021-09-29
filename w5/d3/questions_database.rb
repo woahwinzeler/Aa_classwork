@@ -2,18 +2,6 @@ require 'sqlite3'
 require 'singleton'
 require 'byebug'
 
-class QuestionsDatabase < SQLite3::Database 
-  include Singleton
-
-
-  def initialize
-    #type translation allows results as hash to turn default array into hash
-    super('questions.db')
-    self.type_translation = true
-    self.results_as_hash = true
-  end
-end 
-
 # module TableMethods 
 #   def find_by(table_name, attribute, attribute_val)
 #     #debugger 
@@ -26,6 +14,18 @@ end
 # end
 
 #'questions' --> questions; 'id' --> id; id --> id; 
+
+class QuestionsDatabase < SQLite3::Database 
+  include Singleton
+
+
+  def initialize
+    #type translation allows results as hash to turn default array into hash
+    super('questions.db')
+    self.type_translation = true
+    self.results_as_hash = true
+  end
+end 
 
 class Question
   # include TableMethods
@@ -61,6 +61,15 @@ class Question
     @users_id = hash['users_id']
   end
 
+  def author 
+    Users.find_by_id(self.id)
+  end
+
+  def replies 
+    #finds replies to a question
+    Replies.find_by_question_id(self.id)
+  end
+
 end
 
 class Users
@@ -90,6 +99,10 @@ class Users
     Question.find_by_author_id(self.id)
   end
 
+  def authored_replies 
+    Replies.find_by_user_id(self.id)
+  end
+
   attr_reader :id, :fname, :lname
   def initialize(hash)
     @id = hash['id']
@@ -97,7 +110,6 @@ class Users
     @lname = hash['lname']
   end
 end
-
 
 class QuestionFollows
   # include TableMethods
@@ -146,16 +158,16 @@ class Replies
     FROM replies
     WHERE users_id = ?
     SQL
-    self.new(reply.first)
+    self.new(reply.first) unless reply.empty?
   end
 
   def self.find_by_question_id(question_id)
-    reply = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+    replies = QuestionsDatabase.instance.execute(<<-SQL, question_id)
     SELECT *
     FROM replies
     WHERE questions_id = ?
     SQL
-    self.new(reply.first)
+    replies.map{|reply| self.new(reply)}
   end
 
 
@@ -166,6 +178,19 @@ class Replies
     @questions_id = hash['questions_id']
     @users_id = hash['users_id']
     @parent_id = hash['parent_id']
+  end
+
+  def author
+   Users.find_by_id(self.users_id)
+  end
+
+  def question
+    Question.find_by_author_id(self.users_id)
+  end 
+
+  def parent_reply
+    pr = Replies.find_by_user_id(self.parent_id) 
+    pr.nil? ? nil : pr 
   end
 
 end
@@ -199,4 +224,12 @@ p q1 = Question.find_by_id(1)
 p Replies.find_by_question_id(1)
 p Replies.find_by_user_id(1)
 p gw = Users.find_by_name("George", "Washington")
-p gw.authored_questions
+p gw_questions = gw.authored_questions
+p gw.authored_replies
+p gw_questions.author 
+p gw_questions.replies 
+p gw_questions.replies.first.author
+p gw_questions.replies.first.question
+p gw_questions.replies.first.parent_reply
+
+
