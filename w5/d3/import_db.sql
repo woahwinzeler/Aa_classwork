@@ -30,3 +30,4 @@ CREATE TABLE replies(
   FOREIGN KEY (parent_id) REFERENCES replies(id)
   FOREIGN KEY (users_id) REFERENCES users(id)
 );
+
