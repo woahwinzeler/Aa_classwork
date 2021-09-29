@@ -127,6 +127,17 @@ class QuestionFollows
     self.new(question_follows.first)
   end
 
+  def self.followers_for_question_id(question_id)
+    question_follows = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+    SELECT users_id
+    FROM question_follows
+    WHERE questions_id = ?
+    SQL
+    
+    question_follows.pop.each_value{|id| Users.find_by_id(id)}
+    # question_follows.map{|follow_hash| self.new(follow_hash)}
+  end
+
   attr_reader :relationships, :users_id, :questions_id
   def initialize(hash)
     @relationships = hash['relationships']
@@ -170,6 +181,15 @@ class Replies
     replies.map{|reply| self.new(reply)}
   end
 
+  def self.find_by_parent(parent_id)
+    replies = QuestionsDatabase.instance.execute(<<-SQL, parent_id)
+    SELECT *
+    FROM replies
+    WHERE parent_id = ?
+    SQL
+    replies.map{|reply| self.new(reply)} unless replies.empty?
+  end
+
 
   attr_reader :id, :body, :users_id, :questions_id, :parent_id
   def initialize(hash)
@@ -181,7 +201,7 @@ class Replies
   end
 
   def author
-   Users.find_by_id(self.users_id)
+    Users.find_by_id(self.users_id)
   end
 
   def question
@@ -191,6 +211,10 @@ class Replies
   def parent_reply
     pr = Replies.find_by_user_id(self.parent_id) 
     pr.nil? ? nil : pr 
+  end
+
+  def child_replies
+    Replies.find_by_parent(self.id)
   end
 
 end
@@ -231,5 +255,7 @@ p gw_questions.replies
 p gw_questions.replies.first.author
 p gw_questions.replies.first.question
 p gw_questions.replies.first.parent_reply
+p gw_questions.replies.first.child_replies
+p QuestionFollows.followers_for_question_id(2)
 
 
