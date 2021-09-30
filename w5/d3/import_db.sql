@@ -62,7 +62,8 @@ values (1, 'a phone helps you talk to people', 1 ,NULL , 2),
 
 INSERT INTO question_likes(id, users_id, questions_id)
 values (1, 1, 2),
-(2, 2, 2);
+(2, 2, 2),
+(3, 1, 3);
 
 
 
