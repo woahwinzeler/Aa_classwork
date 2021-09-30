@@ -48,10 +48,13 @@ values (1, 'George', 'Washington'),
 
 INSERT INTO questions(id, title, body, users_id)
 values (1, 'phone?', 'What is a phone?', 1), 
-(2, 'vacation', 'When can we go to Hawaii?', 2);
+(2, 'vacation', 'When can we go to Hawaii?', 2),
+(3, 'bike','How do I ride a bike?', 1);
 
 INSERT INTO question_follows(relationships, users_id, questions_id)
-values (1, 1, 2);
+values (1, 1, 2),
+(2, 1, 1),
+(3, 2, 1);
 
 INSERT INTO replies(id, body, questions_id, parent_id, users_id)
 values (1, 'a phone helps you talk to people', 1 ,NULL , 2),
