@@ -15,5 +15,13 @@ class Course < ApplicationRecord
     foreign_key: :course_id,
     class_name: :Enrollment
   
-  belongs_to :
+  has_many :enrolled_students,
+    through: :enrollments,
+    source: :user
+    # polymorphic: true
+
+  belongs_to :prerequisite,
+    through: :course,
+    source: :prereq_id
+
 end
