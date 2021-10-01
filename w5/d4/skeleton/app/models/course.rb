@@ -17,7 +17,8 @@ class Course < ApplicationRecord
   
   has_many :enrolled_students,
     through: :enrollments,
-    source: :user
+    source: :students
+    #foreign_key: :course_id
     # polymorphic: true
   
   has_many :users
