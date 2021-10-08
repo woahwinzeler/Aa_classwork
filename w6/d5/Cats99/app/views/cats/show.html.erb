@@ -1,2 +1,8 @@
-<h1>Cats#show</h1>
-<p>Find me in app/views/cats/show.html.erb</p>
+<% cat = @c %>
+<h1><%= cat.name %></h1>
+<table>
+  <tr><%= cat.birth_date %></tr>
+  <tr><%= cat.sex %></tr>
+  <tr><%= cat.color %></tr>
+  <tr><%= cat.description %></tr>
+</table>
