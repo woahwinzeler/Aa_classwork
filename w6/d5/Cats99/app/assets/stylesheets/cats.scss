@@ -2,9 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-tr {
-  display: block;
-  width: 20px;
-  height: 20px;
-  font-size: 200px;
+td {
+  font-size: 20px;
+  margin: 200px;
+  border: 1px solid black;  
 }
+
+thead{
+  background-color: rgb(212, 16, 212);
+  color: white; 
+  font-family: Comic sans ms; 
+}
+

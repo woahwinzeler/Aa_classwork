@@ -1,8 +1,11 @@
 <% cat = @c %>
-<h1><%= cat.name %></h1>
+<h1></h1>
 <table>
-  <tr><%= cat.birth_date %></tr>
-  <tr><%= cat.sex %></tr>
-  <tr><%= cat.color %></tr>
-  <tr><%= cat.description %></tr>
+  <thead><tr><th colspan='4'> <%= cat.name %> </th></tr></thead>
+  <tbody><tr><td><%= cat.birth_date %></td>
+  <td><%= cat.sex %></td>
+  <td><%= cat.color %></td>
+  <td><%= cat.description %></td>
+  </tr>
+  </tbody>
 </table>
