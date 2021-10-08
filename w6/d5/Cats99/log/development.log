@@ -523,3 +523,87 @@ Processing by CatsController#show as HTML
 Completed 200 OK in 43ms (Views: 40.5ms | ActiveRecord: 0.4ms)
 
 
+Started GET "/cats/new" for ::1 at 2021-10-08 15:59:18 -0700
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/daroth/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting keyword_end
+      render :json cat.errors.full_messages, status...
+                   ^~~
+/Users/daroth/Code/aa-course_work/aa-pairs/owen/Aa_classwork/w6/d5/Cats99/app/controllers/cats_controller.rb:22: syntax error, unexpected tLABEL, expecting '='
+...t.errors.full_messages, status: 422
+...                        ^~~~~~~:
+  app/controllers/cats_controller.rb:22:in `'
+
+Started POST "/__better_errors/d5c660eb4d50777e/variables" for ::1 at 2021-10-08 15:59:18 -0700
+Started GET "/cats/new" for ::1 at 2021-10-08 16:03:06 -0700
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting keyword_end
+      render :json cat.errors.full_messages, status...
+                   ^~~
+/Users/daroth/Code/aa-course_work/aa-pairs/owen/Aa_classwork/w6/d5/Cats99/app/controllers/cats_controller.rb:22: syntax error, unexpected tLABEL, expecting '='
+...t.errors.full_messages, status: 422
+...                        ^~~~~~~:
+  app/controllers/cats_controller.rb:22:in `'
+
+Started POST "/__better_errors/ff598bd5253966fa/variables" for ::1 at 2021-10-08 16:03:06 -0700
+Started GET "/cats/new" for ::1 at 2021-10-08 16:03:08 -0700
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting keyword_end
+      render :json cat.errors.full_messages, status...
+                   ^~~
+/Users/daroth/Code/aa-course_work/aa-pairs/owen/Aa_classwork/w6/d5/Cats99/app/controllers/cats_controller.rb:22: syntax error, unexpected tLABEL, expecting '='
+...t.errors.full_messages, status: 422
+...                        ^~~~~~~:
+  app/controllers/cats_controller.rb:22:in `'
+
+Started POST "/__better_errors/4a1183446205b358/variables" for ::1 at 2021-10-08 16:03:08 -0700
+Started GET "/cats/new" for ::1 at 2021-10-08 16:04:17 -0700
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting keyword_end
+      render :json cat.errors.full_messages, status...
+                   ^~~
+/Users/daroth/Code/aa-course_work/aa-pairs/owen/Aa_classwork/w6/d5/Cats99/app/controllers/cats_controller.rb:22: syntax error, unexpected tLABEL, expecting '='
+...t.errors.full_messages, status: 422
+...                        ^~~~~~~:
+  app/controllers/cats_controller.rb:22:in `'
+
+Started POST "/__better_errors/51c378f846912fa1/variables" for ::1 at 2021-10-08 16:04:17 -0700
+Started GET "/cats/1" for ::1 at 2021-10-08 16:04:22 -0700
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting keyword_end
+      render :json cat.errors.full_messages, status...
+                   ^~~
+/Users/daroth/Code/aa-course_work/aa-pairs/owen/Aa_classwork/w6/d5/Cats99/app/controllers/cats_controller.rb:22: syntax error, unexpected tLABEL, expecting '='
+...t.errors.full_messages, status: 422
+...                        ^~~~~~~:
+  app/controllers/cats_controller.rb:22:in `'
+
+Started POST "/__better_errors/4de41a18a396a4fd/variables" for ::1 at 2021-10-08 16:04:22 -0700
+Started GET "/cats" for ::1 at 2021-10-08 16:04:26 -0700
+
+SyntaxError - syntax error, unexpected tIDENTIFIER, expecting keyword_end
+      render :json cat.errors.full_messages, status...
+                   ^~~
+/Users/daroth/Code/aa-course_work/aa-pairs/owen/Aa_classwork/w6/d5/Cats99/app/controllers/cats_controller.rb:22: syntax error, unexpected tLABEL, expecting '='
+...t.errors.full_messages, status: 422
+...                        ^~~~~~~:
+  app/controllers/cats_controller.rb:22:in `'
+
+Started POST "/__better_errors/d55b2943c9cb57f3/variables" for ::1 at 2021-10-08 16:04:26 -0700
+Started GET "/cats" for ::1 at 2021-10-08 16:04:48 -0700
+Processing by CatsController#index as HTML
+  Rendering cats/index.html.erb within layouts/application
+  [1m[36mCat Load (3.8ms)[0m  [1m[34mSELECT "cats".* FROM "cats"[0m
+  ↳ app/views/cats/index.html.erb:2
+  Rendered cats/index.html.erb within layouts/application (27.5ms)
+Completed 200 OK in 203ms (Views: 175.7ms | ActiveRecord: 20.9ms)
+
+
+Started GET "/cats/new" for ::1 at 2021-10-08 16:04:53 -0700
+Processing by CatsController#new as HTML
+  Rendering cats/new.html.erb within layouts/application
+  Rendered cats/new.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 38ms (Views: 37.3ms | ActiveRecord: 0.0ms)
+
+
