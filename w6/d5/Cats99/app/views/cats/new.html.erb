@@ -1,4 +1,4 @@
-<form>
+<form action="<%= cats_url %>" method="POST">
   <label>Birth Date<input type="date" name="cats[birth_date]"></label>
   <br />
   <label>Name<input type="text" name="cats[name]"></label>
@@ -14,4 +14,6 @@
   <option value = 'Purple'>Purple</option>
   <option value = 'White'>White</option>
   </select>
+  <br />
+  <input type="submit" value="New User">
 </form>
