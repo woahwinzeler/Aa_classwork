@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
-
+  #CRLLL
   def current_user 
     users_token = session[:session_token]
     current_user = User.find_by(session_token: users_token)
     current_user
+  end
+  
+  def require_logged_in 
   end
   
   def logged_in? 
@@ -19,4 +22,7 @@ class ApplicationController < ActionController::Base
   def login(user)
     session[:session_token] = user.reset_session_token!
   end 
+
+  def logout 
+  end
 end
