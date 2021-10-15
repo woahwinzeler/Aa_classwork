@@ -52,6 +52,24 @@ RSpec.describe User, type: :model do
 
   end
 
+  describe "self.find_by_credentials" do
+    let!(:user) { create(:user) }
+    context "Returns user if username corresponds to password" do
+      it do
+        password = user.password 
+        username = user.username 
+        expect(user.find_by_credentials(username, password)).to eq(user)
+      end
+    end 
+
+    context "Returns nil if username does not corresponds to password" do
+      it do
+        username = user.username 
+        expect(user.find_by_credentials(username, "incorrect password")).to eq(nil)
+      end
+    end
+  end
+
 
   #methods SPIRE CRLLL
   #self.find_by_credentials 
