@@ -7,9 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(id: params[:id]) #nil or error ?
-    @user = user
-    if user
+    @user = User.find_by(id: params[:id]) #nil or error ?
+    if @user
       render :show
     else
       flash[:errors] = ["User not found"]
@@ -39,8 +38,8 @@ class UsersController < ApplicationController
         logout(@user)
         @user.destroy
       else
-      flash[:errors] = ["Cannot destroy users that aren't yourself"]
-      redirect_to users_url
+        flash[:errors] = ["Cannot destroy users that aren't yourself"]
+        redirect_to users_url
       end
     else
       flash[:errors] = ["User not found"]

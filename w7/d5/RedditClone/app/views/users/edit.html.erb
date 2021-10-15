@@ -1,0 +1,9 @@
+<form action="<%= users_url%>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+  <label> Username 
+    <input type="text" name="user[username]" value="<%= @user.username%>"/>
+  </label>
+  <br>
+  <input type="submit" value="Submit Changes!">
+</form>
