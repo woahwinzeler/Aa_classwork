@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_reader :password
 
-  after_validation :ensure_session_token
+  after_initialize :ensure_session_token
 
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def is_valid_password?(password)
-    pw_object = BCrtypt::Password.new(self.password_digest)
+    pw_object = BCrypt::Password.new(self.password_digest)
     pw_object.is_password?(password)
   end
 

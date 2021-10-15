@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     if @user
       if @user == current_user
-        #log_out(@user)
+        logout(@user)
         @user.destroy
       else
       flash[:errors] = ["Cannot destroy users that aren't yourself"]
@@ -61,8 +61,12 @@ class UsersController < ApplicationController
   def update
     user = User.find_by(id: params[:id])
     if user
-      user.update(user_params)
-      
+      if user.update(user_params)
+        redirect_to user_url(user)
+      else
+        flash[:errors] = user.errors.full_messages 
+        render :edit
+      end 
     else
       flash[:errors] = ["User not found"]
       redirect_to users_url 
