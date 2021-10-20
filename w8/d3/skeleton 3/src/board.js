@@ -112,20 +112,35 @@ Board.prototype.isOccupied = function (pos) {
  */
 
 
-Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
+Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip=[]){
   //get the 'next' pos
   //adding pos + dir 
   let next_pos = [pos[0] + dir[0], pos[1] + dir[1]];
 
-  if (this.isValidPos(next_pos) && (this.grid[next_pos[0]][next_pos[1]].color != color)){
-    piecesToFlip.push(next_pos);
-    this._positionsToFlip(next_pos,color, dir, piecesToFlip); 
-  } else if (this.isValidPos(next_pos) && (this.grid[next_pos[0]][next_pos[1]] === [])) {
-      return piecesToFlip; 
-    // this._positionsToFlip(next_pos,color, dir, piecesToFlip);
-  } else if (this.isValidPos(next_pos) && (this.grid[next_pos[0]][next_pos[1]].color === color)){
-    return piecesToFlip; 
+  if (this.isValidPos(next_pos)) {
+    if (!(this.grid[next_pos[0]][next_pos[1]] instanceof Piece)) {
+      return []; 
+    } else {
+      if ((this.grid[next_pos[0]][next_pos[1]].color === color)) {
+        return piecesToFlip;
+      } else {
+        piecesToFlip.push(next_pos);
+        return this._positionsToFlip(next_pos, color, dir, piecesToFlip);
+      }
+    }
+  } else {
+    return []; 
   }
+
+  // if (this.isValidPos(next_pos) && (this.grid[next_pos[0]][next_pos[1]].color != color)){
+  //   piecesToFlip.push(next_pos);
+  //   this._positionsToFlip(next_pos,color, dir, piecesToFlip); 
+  // } else if (this.isValidPos(next_pos) && (this.grid[next_pos[0]][next_pos[1]] === [])) {
+  //     return piecesToFlip; 
+  //   // this._positionsToFlip(next_pos,color, dir, piecesToFlip);
+  // } else if (this.isValidPos(next_pos) && (this.grid[next_pos[0]][next_pos[1]].color === color)){
+  //   return piecesToFlip; 
+  // }
   //check color/ if it's valid 
   //either call recusivley, return an empty array, or return piecesToFlip 
   //piecesToFlip is built recursivley based on dir
@@ -137,6 +152,18 @@ Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
  * color being flipped.
  */
 Board.prototype.validMove = function (pos, color) {
+  let is_occupied = this.isOccupied(pos); 
+  if (!is_occupied) {
+    for (i = 0; i < Board.DIRS.length; i++) {
+      let new_arr = this._positionsToFlip(pos, color, Board.DIRS[i])
+      if (new_arr.length > 0) {
+        return true;
+      }
+    }
+  } else {
+    return false;
+  }
+  return false; 
 };
 
 /**
