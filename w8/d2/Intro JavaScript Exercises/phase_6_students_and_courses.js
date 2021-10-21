@@ -9,11 +9,20 @@ Student.prototype.name = function () {
 }
 
 Student.prototype.enroll = function (course) {
-    if (!(this.courses.includes(course))) {
+    if (!(this.courses.includes(course)) && !this.hasConflict(course)) {
         this.courses.push(course);
         //update course list 
         course.addStudent(this);
     } 
+}
+
+Student.prototype.hasConflict = function (course) {
+  for (let i = 0; i < this.courses.length; i++) {
+    if (course.conflictsWith(this.courses[i])) {
+      return true 
+    }
+  }
+  return false 
 }
 
 Student.prototype.courseLoad = function () {
@@ -29,30 +38,30 @@ Student.prototype.courseLoad = function () {
     return courseload; 
 }
 
-function Course (courseName, department, numCredits) {
+function Course (courseName, department, numCredits, daysArr, timeBlock) {
     this.courseName = courseName;
     this.department = department;
     this.numCredits = numCredits;
     this.students = [];
+    this.daysArr = daysArr;
+    this.timeBlock = timeBlock;
 }
 
 Course.prototype.addStudent = function(student){
   this.students.push(student);
 }
 
-let Student1 = new Student("Owen", "Winzeler");
-let Student2 = new Student("Jacky", "Chen");
+Course.prototype.conflictsWith = function (course) {
+  let this_daysArr = this.daysArr;
+  let other_daysArr = course.daysArr;
+  // let conflicting_days = [];
+  
+  if (this.timeBlock != course.timeBlock) return false; 
 
-let Course1 = new Course("English 101", "English", 4);
-let Course2 = new Course("AstroPhysics 244", "Math", 3);
-
-Student1.enroll(Course1)
-Student1.enroll(Course2)
-
-console.log(Student1.courseLoad())
-
-
-
-
-
+  for (i = 0; i < this_daysArr.length; i++) {
+    if (other_daysArr.includes(this_daysArr[i])) {
+      return true;
+    }
+  }
+}
 
