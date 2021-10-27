@@ -16,6 +16,29 @@ class FollowToggle {
     }
   }
 
+  handleClick(e){
+    e.preventDefault();
+
+    let success = (response) => {
+      this.render(); 
+    }
+
+    if (this.followState === "unfollowed")
+    //AJAX request 
+      $.ajax ({
+        method: 'POST',
+        url: `/users/${this.userId}/follow`, 
+        datatype: "JSON"
+      }).then(success)
+    else {
+      $.ajax ({
+        method: 'DELETE',
+        url: `/users/${this.userId}/follow`, 
+        datatype: "JSON"
+      }).then(success)
+    }
+  }
+
 }
 
 module.exports = FollowToggle; 

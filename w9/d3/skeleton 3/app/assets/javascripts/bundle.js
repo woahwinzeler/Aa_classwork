@@ -25,6 +25,29 @@ class FollowToggle {
     }
   }
 
+  handleClick(e){
+    e.preventDefault();
+
+    let success = (response) => {
+      this.render(); 
+    }
+
+    if (this.followState === "unfollowed")
+    //AJAX request 
+      $.ajax ({
+        method: 'POST',
+        url: `/users/${this.userId}/follow`, 
+        datatype: "JSON"
+      }).then(success)
+    else {
+      $.ajax ({
+        method: 'DELETE',
+        url: `/users/${this.userId}/follow`, 
+        datatype: "JSON"
+      }).then(success)
+    }
+  }
+
 }
 
 module.exports = FollowToggle; 
@@ -66,14 +89,6 @@ var __webpack_exports__ = {};
   \*****************************/
 var followToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
 // const FollowToggle = require('./follow_toggle');
-
-
-const $submitButton = $('.followToggle'); 
-
-$submitButton.each(function (button){
-  //pass in follow toggle constructor
-  let newButton = new FollowToggle();
-})
 
 $( document ).ready(function () {
   const $submitButton = $('.followToggle'); 
