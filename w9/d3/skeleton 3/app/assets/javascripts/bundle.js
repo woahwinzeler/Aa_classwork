@@ -10,11 +10,20 @@
 
 
 class FollowToggle {
-  constructor(userId, followState){
-    this.userId = userId;
-    this.followState = followState; 
+  constructor(el){
+    this.userId = el.user-id;
+    this.followState = el.initial-follow-state; 
+    this.el = el;
+    this.render();
   }
 
+  render() {
+    if(this.followState === "unfollowed") {
+      el.text("follow");
+    } else {
+      el.text("unfollow");
+    }
+  }
 
 }
 
@@ -55,8 +64,8 @@ var __webpack_exports__ = {};
 /*!*****************************!*\
   !*** ./frontend/twitter.js ***!
   \*****************************/
-var followToggle = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'follow_toggle.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-const FollowToggle = __webpack_require__(/*! ./follow_toggle */ "./frontend/follow_toggle.js");
+var followToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
+// const FollowToggle = require('./follow_toggle');
 
 
 const $submitButton = $('.followToggle'); 
@@ -65,6 +74,16 @@ $submitButton.each(function (button){
   //pass in follow toggle constructor
   let newButton = new FollowToggle();
 })
+
+$( document ).ready(function () {
+  const $submitButton = $('.followToggle'); 
+
+$submitButton.each(function (index){
+  //pass in follow toggle constructor
+  let newButton = new FollowToggle($submitButton[index]);
+});
+}) 
+
 })();
 
 /******/ })()
