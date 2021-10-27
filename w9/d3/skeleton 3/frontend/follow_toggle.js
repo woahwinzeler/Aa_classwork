@@ -2,17 +2,22 @@
 
 class FollowToggle {
   constructor(el){
-    this.userId = el.user-id;
-    this.followState = el.initial-follow-state; 
-    this.el = el;
-    this.render();
+    this.userId = el.data-user-id;
+    this.followState = el.data-initial-follow-state; 
+    // this.el = el;
+    // this.render();
+    // this.handleClick()
   }
 
   render() {
     if(this.followState === "unfollowed") {
-      el.text("follow");
+      this.el.text("follow");
+      this.followState = 'follow';
+      this.el.attr('data-initial-follow-state', 'follow');
     } else {
-      el.text("unfollow");
+      this.el.text("unfollow");
+      this.followState = 'unfollow';
+      this.el.attr('data-initial-follow-state', 'unfollow');
     }
   }
 

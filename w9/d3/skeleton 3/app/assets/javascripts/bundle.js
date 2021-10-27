@@ -11,17 +11,22 @@
 
 class FollowToggle {
   constructor(el){
-    this.userId = el.user-id;
-    this.followState = el.initial-follow-state; 
-    this.el = el;
-    this.render();
+    this.userId = el.data-user-id;
+    this.followState = el.data-initial-follow-state; 
+    // this.el = el;
+    // this.render();
+    // this.handleClick()
   }
 
   render() {
     if(this.followState === "unfollowed") {
-      el.text("follow");
+      this.el.text("follow");
+      this.followState = 'follow';
+      this.el.attr('data-initial-follow-state', 'follow');
     } else {
-      el.text("unfollow");
+      this.el.text("unfollow");
+      this.followState = 'unfollow';
+      this.el.attr('data-initial-follow-state', 'unfollow');
     }
   }
 
@@ -90,12 +95,15 @@ var __webpack_exports__ = {};
 var followToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js");
 // const FollowToggle = require('./follow_toggle');
 
+let buttons = [];
 $( document ).ready(function () {
   const $submitButton = $('.followToggle'); 
 
 $submitButton.each(function (index){
   //pass in follow toggle constructor
-  let newButton = new FollowToggle($submitButton[index]);
+  console.log(followToggle);
+  console.log($submitButton[index]);
+  buttons.push(new followToggle($submitButton[index]));
 });
 }) 
 
