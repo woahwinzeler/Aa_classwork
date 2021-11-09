@@ -1,5 +1,4 @@
-import React from 'react'
-import { RECEIVE_TODOS, RECEIVE_TODO, recieveTodos, recieveTodo } from '../actions/todo'
+import { RECEIVE_TODOS, RECEIVE_TODO, DELETE_TODO, removeTodo, recieveTodos, recieveTodo } from '../actions/todo'
 import makeIdentity from '../util/identify'
 
 const initialState = {
@@ -28,6 +27,12 @@ const todosReducer = (state=initialState, action) => {
     case RECEIVE_TODO:
       const newReturnState = Object.assign(action.todo, state);
       return newReturnState;
+    case DELETE_TODO: 
+      // console.log(action.todo)
+      // console.log(todoId)
+      const newState = Object.assign({}, state);
+      delete newState[action.todo.id]; 
+      return newState; 
     default:
       return state; 
   }
