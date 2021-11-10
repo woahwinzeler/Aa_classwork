@@ -7,10 +7,10 @@ class App extends React.Component {
   }
   render(){
     const store = this.props.store
-  return (
-    <TodoList store={store}>
-    <h1> ToDos App </h1>
-    </TodoList>
+    return (
+      <TodoList store={store}>
+        <h1> ToDos App </h1>
+      </TodoList>
     )
   }
 }

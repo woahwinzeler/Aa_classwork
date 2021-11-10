@@ -3,9 +3,9 @@ import allTodos from '../../reducers/selectors'
 import TodoList from './todo_list'
 import recieveTodo from '../../actions/todo'
 
-const mSTP = ({ store }) => {
+const mSTP = state => {
     return {
-        todos: allTodos(store.todos)
+        todos: allTodos(state)
     }
 }
 const mDTP = (dispatch) => ({
