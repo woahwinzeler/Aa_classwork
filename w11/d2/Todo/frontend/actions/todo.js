@@ -12,6 +12,6 @@ export const recieveTodo = todo => {
   return {type: RECEIVE_TODO, todo} 
 }; 
 
-export const removeTodo = todo => {
-  return {type: DELETE_TODO, todo}
+export const removeTodo = todoId => {
+  return {type: DELETE_TODO, todoId}
 };

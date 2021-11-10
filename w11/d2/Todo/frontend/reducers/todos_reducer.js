@@ -19,19 +19,20 @@ const initialState = {
 
 const todosReducer = (state=initialState, action) => {
   Object.freeze(state);
-  let newState;
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_TODOS:
-     const returnState = Object.assign(makeIdentity(action.todos), {});
+     const returnState = Object.assign(newState, makeIdentity(action.todos));
      return returnState;
     case RECEIVE_TODO:
-      const newReturnState = Object.assign(action.todo, state);
-      return newReturnState;
+      
+     newState[action.todo.id] = action.todo;
+      return newState;
     case DELETE_TODO: 
       // console.log(action.todo)
       // console.log(todoId)
-      const newState = Object.assign({}, state);
-      delete newState[action.todo.id]; 
+       
+      delete newState[action.todoId]; 
       return newState; 
     default:
       return state; 
