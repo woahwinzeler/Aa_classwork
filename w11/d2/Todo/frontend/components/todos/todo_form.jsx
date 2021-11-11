@@ -24,6 +24,7 @@ class TodoForm extends React.Component {
         console.log("state set")
     }
 
+    //Not working 
     updateTodo(e){
         e.preventDefault();
         let todo = this.state;
