@@ -3,7 +3,11 @@ import React from 'react'
 class TodoForm extends React.Component {
     constructor(props){
         super(props);
-
+        this.state = {
+          id: 3,
+          body: "",
+          title: ""
+        }
         this.updateBody = this.updateBody.bind(this);
         this.updateTitle = this.updateTitle.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,8 +26,12 @@ class TodoForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
         let todo = this.state;
-        this.props.recieveTodo(todo);
-        this.setState({ title: "", body: "", id: ++this.state.id})
+        // console.log(todo.id, "1");
+        this.props.recievetodo(todo);
+        // console.log(todo.id, "2");
+        this.setState({ title: "", body: "", id: ++this.state.id}, () => console.log(todo.id, "3")) 
+
+        // this.setState({ title: "", body: "", id: ++this.state.id})
     }
 
     render(){
@@ -35,7 +43,7 @@ class TodoForm extends React.Component {
                     <input 
                         name="title"
                         type="text"
-                        value={this.props.title}
+                        value={this.state.title}
                         onChange={this.updateTitle}
                     />
                 </label>
@@ -43,7 +51,7 @@ class TodoForm extends React.Component {
                     <input 
                         name="body"
                         type="text"
-                        value={this.props.body}
+                        value={this.state.body}
                         onChange={this.updateBody}
                     />
                 </label>
