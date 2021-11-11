@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import allTodos from '../../reducers/selectors'
 import TodoList from './todo_list'
-import {recieveTodo} from '../../actions/todo'
+import {recieveTodo, removeTodo} from '../../actions/todo'
 
 const mSTP = state => {
     return {
@@ -9,7 +9,8 @@ const mSTP = state => {
     }
 }
 const mDTP = (dispatch) => ({
-    recieveTodo: (todo) => (dispatch(recieveTodo(todo))) 
+    recieveTodo: (todo) => (dispatch(recieveTodo(todo))),
+    removeTodo: (todo) => (dispatch(removeTodo(todo)))
 })
 
 export default connect(mSTP, mDTP)(TodoList)
