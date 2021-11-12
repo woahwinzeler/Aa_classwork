@@ -6,6 +6,7 @@ import { receiveStep, receiveSteps, removeStep} from './actions/step_actions'
 import App from './components/app'
 import Root from './components/root'
 import allTodos from './reducers/selectors'
+import { fetchTodos } from './util/todo_api_util'
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
@@ -21,4 +22,5 @@ document.addEventListener('DOMContentLoaded', () => {
   window.receiveStep = receiveStep;
   window.removeStep = removeStep;
   window.receiveSteps = receiveSteps;
+  window.fetchTodos = fetchTodos;
 }); 

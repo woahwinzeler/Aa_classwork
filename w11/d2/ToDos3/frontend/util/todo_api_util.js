@@ -1,4 +1,4 @@
-const fetchTodos = () => {
+export const fetchTodos = () => {
   return $.ajax(
     { 
       method: "GET",
