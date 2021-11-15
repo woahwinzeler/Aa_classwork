@@ -90,17 +90,21 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/pokemon_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_ALL_POKEMON, receiveAllPokemon, requestAllPokemon */
+/*! exports provided: RECEIVE_ALL_POKEMON, RECEIVE_A_POKEMON, receiveAllPokemon, requestAllPokemon, receiveAPokemon, requestAPokemon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_POKEMON", function() { return RECEIVE_ALL_POKEMON; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_A_POKEMON", function() { return RECEIVE_A_POKEMON; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAllPokemon", function() { return receiveAllPokemon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAllPokemon", function() { return requestAllPokemon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAPokemon", function() { return receiveAPokemon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAPokemon", function() { return requestAPokemon; });
 /* harmony import */ var _util_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api_util */ "./frontend/util/api_util.js");
 
 var RECEIVE_ALL_POKEMON = "RECEIVE_ALL_POKEMON";
+var RECEIVE_A_POKEMON = "RECEIVE_A_POKEMON";
 var receiveAllPokemon = function receiveAllPokemon(pokemon) {
   return {
     type: RECEIVE_ALL_POKEMON,
@@ -111,6 +115,19 @@ var requestAllPokemon = function requestAllPokemon() {
   return function (dispatch) {
     return _util_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllPokemon"]().then(function (pokemon) {
       return dispatch(receiveAllPokemon(pokemon));
+    });
+  };
+};
+var receiveAPokemon = function receiveAPokemon(pokemon) {
+  return {
+    type: RECEIVE_A_POKEMON,
+    pokemon: pokemon
+  };
+};
+var requestAPokemon = function requestAPokemon() {
+  return function (dispatch) {
+    return _util_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchPokemon"]().then(function (pokemon) {
+      return dispatch(receiveAPokemon(pokemon));
     });
   };
 };
@@ -188,9 +205,13 @@ var PokemonIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(PokemonIndex);
 
   function PokemonIndex(props) {
+    var _this;
+
     _classCallCheck(this, PokemonIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(PokemonIndex, [{
@@ -199,12 +220,22 @@ var PokemonIndex = /*#__PURE__*/function (_React$Component) {
       this.props.requestAllPokemon();
     }
   }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      console.log("Getting hit");
+      console.log(e);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      //Add onClick handler to fetch a specific pokemon? 
       var pokemonItems = this.props.pokemon.map(function (poke) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: poke.id,
-          pokemon: poke
+          pokemon: poke,
+          onClick: _this2.handleClick
         });
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -489,16 +520,23 @@ var configureStore = function configureStore() {
 /*!***********************************!*\
   !*** ./frontend/util/api_util.js ***!
   \***********************************/
-/*! exports provided: fetchAllPokemon */
+/*! exports provided: fetchAllPokemon, fetchPokemon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllPokemon", function() { return fetchAllPokemon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPokemon", function() { return fetchPokemon; });
 var fetchAllPokemon = function fetchAllPokemon() {
   return $.ajax({
     method: "GET",
     url: "/api/pokemon"
+  });
+};
+var fetchPokemon = function fetchPokemon(pokemonId) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/pokemon/".concat(pokemonId)
   });
 };
 
