@@ -1,7 +1,13 @@
 import React from 'react'
 
-const pokemonIndexItem = (props) => {
-  <li name={pokemon.name} image_url={pokemon.image_url}> </li>
+const PokemonIndexItem = (props) => {
+  
+  return (
+    <li>
+      <img className="img" src={props.pokemon.imageUrl} />
+      {props.pokemon.name}
+    </li>
+  )
 }
 
-export default pokemonIndexItem;
+export default PokemonIndexItem;
