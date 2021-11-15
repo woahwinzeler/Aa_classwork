@@ -403,3 +403,33 @@ Processing by StaticPagesController#root as HTML
 Completed 200 OK in 751ms (Views: 747.3ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for ::1 at 2021-11-11 16:51:37 -0800
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/williamwinzeler/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 501ms (Views: 499.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todos/" for ::1 at 2021-11-11 16:51:40 -0800
+Processing by Api::TodosController#index as */*
+  [1m[36mTodo Load (1.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+  ↳ app/controllers/api/todos_controller.rb:8
+Completed 200 OK in 7ms (Views: 1.2ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/" for ::1 at 2021-11-11 16:52:13 -0800
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 223ms (Views: 221.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/todos/" for ::1 at 2021-11-11 16:52:16 -0800
+Processing by Api::TodosController#index as */*
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos"[0m
+  ↳ app/controllers/api/todos_controller.rb:8
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.3ms)
+
+

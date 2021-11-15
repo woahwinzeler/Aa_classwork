@@ -56,8 +56,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DELETE_TODO": () => (/* binding */ DELETE_TODO),
 /* harmony export */   "recieveTodos": () => (/* binding */ recieveTodos),
 /* harmony export */   "recieveTodo": () => (/* binding */ recieveTodo),
-/* harmony export */   "removeTodo": () => (/* binding */ removeTodo)
+/* harmony export */   "removeTodo": () => (/* binding */ removeTodo),
+/* harmony export */   "fetchToDos": () => (/* binding */ fetchToDos)
 /* harmony export */ });
+/* harmony import */ var _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/todo_api_util */ "./frontend/util/todo_api_util.js");
+
 var RECEIVE_TODOS = "RECEIVE_TODOS";
 var RECEIVE_TODO = "RECEIVE_TODO";
 var DELETE_TODO = "DELETE_TODO"; //Plural
@@ -79,6 +82,13 @@ var removeTodo = function removeTodo(todoId) {
   return {
     type: DELETE_TODO,
     todoId: todoId
+  };
+};
+var fetchToDos = function fetchToDos() {
+  return function (dispatch) {
+    return _util_todo_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchTodos().then(function (todos) {
+      return dispatch(recieveTodos(todos));
+    });
   };
 };
 
@@ -544,9 +554,10 @@ var thunkMiddleware = function thunkMiddleware(_ref) {
       getState = _ref.getState;
   return function (next) {
     return function (action) {
-      if (typeof action === "function") {
+      if (typeof action === 'function') {
         return action(dispatch, getState);
       } else {
+        console.log(action);
         return next(action);
       }
     };
@@ -34859,6 +34870,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reducers/selectors */ "./frontend/reducers/selectors.js");
 /* harmony import */ var _util_todo_api_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./util/todo_api_util */ "./frontend/util/todo_api_util.js");
+/* harmony import */ var _middleware_thunk__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./middleware/thunk */ "./frontend/middleware/thunk.js");
+
 
 
 
@@ -34885,6 +34898,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.removeStep = _actions_step_actions__WEBPACK_IMPORTED_MODULE_4__.removeStep;
   window.receiveSteps = _actions_step_actions__WEBPACK_IMPORTED_MODULE_4__.receiveSteps;
   window.fetchTodos = _util_todo_api_util__WEBPACK_IMPORTED_MODULE_8__.fetchTodos;
+  window.thunkMiddleware = _middleware_thunk__WEBPACK_IMPORTED_MODULE_9__["default"];
 });
 })();
 
