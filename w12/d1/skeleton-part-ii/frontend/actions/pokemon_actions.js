@@ -13,12 +13,14 @@ export const requestAllPokemon = () => (dispatch) => (
     .then(pokemon => dispatch(receiveAllPokemon(pokemon)))
 )
 
-export const receiveAPokemon = (pokemon) => ({
+export const receiveAPokemon = pokemon => ({
   type: RECEIVE_A_POKEMON,
-  pokemon 
+  pokemon: pokemon.pokemon,
+  items: pokemon.items,
+  moves: pokemon.moves
 });
 
-export const requestAPokemon = () => (dispatch) => (
-  APIUtil.fetchPokemon()
+export const requestAPokemon = (pokemonID) => (dispatch) => (
+  APIUtil.fetchPokemon(pokemonID)
     .then(pokemon => dispatch(receiveAPokemon(pokemon)))
 )
